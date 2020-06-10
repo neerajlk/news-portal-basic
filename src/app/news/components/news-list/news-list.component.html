@@ -1,0 +1,62 @@
+<div class="container-fluid">
+  <form [formGroup]="newsForm">
+    <div class="row py-3 justify-content-md-center">
+      <div class="col-lg-6 col-md-6 col-sm-12 bg-light-blue py-2">
+        <select
+          formControlName="country"
+          class="w-100 text-center text-uppercase p-1"
+        >
+          <option value="in">India</option>
+          <option value="us">USA</option>
+          <option value="au">Australia</option>
+        </select>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12 bg-light-blue py-2">
+        <input
+          type="text"
+          class="w-100 text-center text-uppercase"
+          placeholder="Search News"
+          formControlName="q"
+        />
+      </div>
+    </div>
+  </form>
+
+  <div class="row mr-0 pr-0 pl-0 ml-0 bg-dark">
+    <div
+      class="col-lg-12 col-md-12 col-sm-12 py-2"
+      *ngFor="let news of newsList | paginate: { itemsPerPage: pageSize, currentPage: pageNumber,totalItems: total }; let i = index "
+    >
+      <div class="card">
+        <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-12">
+            <img src="{{ news.urlToImage }}" class="card-img-top" alt="..." />
+          </div>
+          <div class="col-lg-8 col-md-8 col-sm-12">
+            <div class="card-body">
+              <h5 class="card-title font-weight-bold">{{ news.title }}</h5>
+              <h6 class="card-title">Author : {{ news.author }}</h6>
+              <h6>
+                Date of Publish : {{ news?.publishedAt | date: "dd-MMM-yyyy" }}
+              </h6>
+
+              <button
+                (click)="ViewNewsDetails(i)"
+                class="btn btn-teal font-italic"
+              >
+                View Details
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-3">
+    <pagination-controls class="text-right" *ngIf="newsList.length !=0" (pageChange)="pageNumber = getData($event)"></pagination-controls>
+  </div>
+
+  <div *ngIf="newsList.length ==0" class="bg-light text-center">
+    NO RESULTS FOUND
+  </div>
+</div>

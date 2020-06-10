@@ -1,0 +1,61 @@
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators';
+import { Router, ActivatedRoute } from '@angular/router';
+
+import { NewsService } from '../../../core/http/news.service';
+
+@Component({
+  selector: 'app-news-list',
+  templateUrl: './news-list.component.html',
+  styleUrls: ['./news-list.component.css'],
+})
+export class NewsListComponent implements OnInit {
+  constructor(
+    private newsService: NewsService,
+    private fb: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
+  newsList = [];
+  newsForm = this.fb.group({
+    country: ['in'],
+    q: [''],
+  });
+  pageNumber: number = 1;
+  total: number = 0;
+  pageSize: number = 10;
+  pageno: number = 1;
+
+  ngOnInit(): void {
+    this.getNewsList();
+    localStorage.clear();
+    this.newsForm.valueChanges.pipe(debounceTime(1000)).subscribe((val) => {
+      this.getNewsList();
+    });
+  }
+
+  getNewsList() {
+    let payload = this.newsForm.value;
+    payload.page = this.pageno;
+    payload.pageSize = this.pageSize;
+    this.newsService.getNews(payload).subscribe((res) => {
+      if (res) {
+        this.total = res['totalResults'];
+        console.log(res['totalResults']);
+        this.newsList = res['articles'];
+      }
+    });
+  }
+
+  ViewNewsDetails(index) {
+    localStorage.setItem('news', JSON.stringify(this.newsList[index]));
+    this.router.navigate(['detail'], { relativeTo: this.route });
+  }
+
+  getData(event) {
+    this.pageno = event;
+    this.getNewsList();
+    return event;
+  }
+}
