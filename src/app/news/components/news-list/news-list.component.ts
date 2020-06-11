@@ -46,12 +46,12 @@ export class NewsListComponent implements OnInit {
     });
   }
 
-  ViewNewsDetails(index) {
+  viewNewsDetails(index) {
     localStorage.setItem('news', JSON.stringify(this.newsList[index]));
     this.router.navigate(['detail'], { relativeTo: this.route });
   }
 
-  getData(page) {
+  getDataByPage(page) {
     this.pageNumber = page;
     this.getNewsList();
     return page;

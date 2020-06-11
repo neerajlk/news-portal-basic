@@ -3,12 +3,12 @@
     News Details
   </div>
   <div class="card-body">
-    <img src="{{ news?.urlToImage }}" class="img-fluid" alt="..." />
-    <h5 class="card-title py-3 font-weight-bold">{{ news?.title }}</h5>
-    <p class="card-text font-italic">{{ news?.description }}</p>
+    <img src="{{ newsDetailObject?.urlToImage }}" class="img-fluid" alt="..." />
+    <h5 class="card-title py-3 font-weight-bold">{{ newsDetailObject?.title }}</h5>
+    <p class="card-text font-italic">{{ newsDetailObject?.description }}</p>
   </div>
-  <a target="_blank" href="{{news?.url}}">View On News Website</a>
+  <a target="_blank" href="{{newsDetailObject?.url}}">View On News Website</a>
   <div class="card-footer text-muted">
-    Publish Date : {{ news?.publishedAt | date: "medium" }}
+    Publish Date : {{ newsDetailObject?.publishedAt | date: "medium" }}
   </div>
 </div>

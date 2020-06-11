@@ -7,10 +7,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 })
 export class NewsDetailComponent implements OnInit, OnDestroy {
   constructor() {}
-  news;
+  newsDetailObject;
 
   ngOnInit(): void {
-    this.news = JSON.parse(localStorage.getItem('news'));
+    this.newsDetailObject = JSON.parse(localStorage.getItem('news'));
   }
 
   ngOnDestroy() {
