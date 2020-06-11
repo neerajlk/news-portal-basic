@@ -6,12 +6,11 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 
 import { BaseService } from './http/base.service';
-import { NewsService } from './http/news.service';
 
 @NgModule({
   declarations: [HeaderComponent, FooterComponent],
   imports: [CommonModule, HttpClientModule],
   exports: [HeaderComponent, FooterComponent],
-  providers: [BaseService, NewsService],
+  providers: [BaseService],
 })
 export class CoreModule {}

@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NewsService } from '../../../core/http/news.service';
 
 @Component({
   selector: 'app-news-detail',

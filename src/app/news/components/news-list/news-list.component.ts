@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { NewsService } from '../../../core/http/news.service';
+import { NewsService } from '../../http/news.service';
 
 @Component({
   selector: 'app-news-list',
@@ -41,7 +41,6 @@ export class NewsListComponent implements OnInit {
     this.newsService.getNews(payload).subscribe((res) => {
       if (res) {
         this.total = res['totalResults'];
-        console.log(res['totalResults']);
         this.newsList = res['articles'];
       }
     });
