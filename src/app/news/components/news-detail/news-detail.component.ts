@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NewsService } from '../../../core/http/news.service';
 
 @Component({
@@ -6,11 +6,15 @@ import { NewsService } from '../../../core/http/news.service';
   templateUrl: './news-detail.component.html',
   styleUrls: ['./news-detail.component.css'],
 })
-export class NewsDetailComponent implements OnInit {
+export class NewsDetailComponent implements OnInit, OnDestroy {
   constructor() {}
   news;
 
   ngOnInit(): void {
     this.news = JSON.parse(localStorage.getItem('news'));
+  }
+
+  ngOnDestroy() {
+    localStorage.clear()
   }
 }

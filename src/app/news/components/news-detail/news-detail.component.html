@@ -1,4 +1,4 @@
-<div class="card text-center">
+<div class="card text-center shadow-lg p-3 mb-5 bg-white rounded">
   <div class="card-header font-italic font-weight-bold text-uppercase">
     News Details
   </div>
@@ -7,7 +7,7 @@
     <h5 class="card-title py-3 font-weight-bold">{{ news?.title }}</h5>
     <p class="card-text font-italic">{{ news?.description }}</p>
   </div>
-  <a target="_blank" href="{{news.url}}">View On News Website</a>
+  <a target="_blank" href="{{news?.url}}">View On News Website</a>
   <div class="card-footer text-muted">
     Publish Date : {{ news?.publishedAt | date: "medium" }}
   </div>

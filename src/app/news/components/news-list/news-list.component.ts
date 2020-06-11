@@ -22,14 +22,13 @@ export class NewsListComponent implements OnInit {
     country: ['in'],
     q: [''],
   });
-  pageNumber: number = 1;
+  previousPage: number = 1;
   total: number = 0;
   pageSize: number = 10;
-  pageno: number = 1;
+  pageNumber: number = 1;
 
   ngOnInit(): void {
     this.getNewsList();
-    localStorage.clear();
     this.newsForm.valueChanges.pipe(debounceTime(1000)).subscribe((val) => {
       this.getNewsList();
     });
@@ -37,7 +36,7 @@ export class NewsListComponent implements OnInit {
 
   getNewsList() {
     let payload = this.newsForm.value;
-    payload.page = this.pageno;
+    payload.page = this.pageNumber;
     payload.pageSize = this.pageSize;
     this.newsService.getNews(payload).subscribe((res) => {
       if (res) {
@@ -53,9 +52,9 @@ export class NewsListComponent implements OnInit {
     this.router.navigate(['detail'], { relativeTo: this.route });
   }
 
-  getData(event) {
-    this.pageno = event;
+  getData(page) {
+    this.pageNumber = page;
     this.getNewsList();
-    return event;
+    return page;
   }
 }

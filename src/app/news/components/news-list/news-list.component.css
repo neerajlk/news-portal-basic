@@ -14,3 +14,12 @@
     color: #fff;
     font-weight: 600;
 }
+
+.p-1-5{
+    padding: .3rem!important;
+}
+
+.btn-shadow{
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.275)!important;
+
+}
