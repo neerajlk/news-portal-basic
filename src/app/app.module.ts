@@ -1,5 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {
+  APP_BASE_HREF,
+  Location,
+  LocationStrategy,
+  HashLocationStrategy,
+} from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,7 +19,7 @@ import { NewsModule } from './news/news.module';
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, AppRoutingModule, CoreModule, NewsModule],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
